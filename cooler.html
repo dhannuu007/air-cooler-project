@@ -1,0 +1,203 @@
+<html>
+
+<head>
+	<title>Cooler by Dj</title>
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Hurricane&family=PT+Sans+Narrow&display=swap');
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			box-sizing: border-box;
+			overflow-x: hidden;
+		}
+
+		.cooler-container {
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 100vw;
+			height: 100vh;
+			background-color: yellow;
+
+		}
+
+		.cooler-heading {
+			margin: 20px auto;
+			color: black;
+			text-align: center;
+			text-shadow: 0 0 3px #ffffff, 0 0 5px #ffffff;
+        
+			font-family: 'Berkshire Swash', cursive;
+
+			/* font-family: 'Hurricane', cursive; */
+			/* font-family: 'PT Sans Narrow', sans-serif; */
+		}
+
+		.cooler {
+			background-color: rgb(0, 0, 0);
+			width: 300px;
+			height: 400px;
+			padding: 20px;
+			border-radius: 20px;
+			box-sizing: border-box;
+
+		}
+
+		.cooler-switch {
+			background-color: red;
+			color: white;
+			width: 50px;
+			height: 30px;
+		}
+
+		.on {
+			border-top-left-radius: 10px;
+			border-bottom-left-radius: 10px;
+		}
+
+		.off {
+			border-top-right-radius: 10px;
+			border-bottom-right-radius: 10px;
+		}
+
+		.wings-container {
+			/* border: 1px solid rgb(255, 255, 255); */
+			width: 100%;
+			height: 80%;
+			margin: 10px auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			border-radius: 10px;
+			background: gray url("diagonal-2490059_960_720.webp");
+			background-size: contain;
+		}
+
+		.wing {
+			width: 200px;
+			border: 10px solid black;
+			border-radius: 100%;
+			padding: 10px;
+			
+		}
+
+		.rotate {
+			animation: rotation 0.3s infinite linear;
+		}
+
+		@keyframes rotation {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		/* cooler foot */
+		.cooler-foot {
+			width: 250px;
+			height: 20px;
+			background-color: black;
+			border-top-left-radius: 20px;
+			border-top-right-radius: 20px;
+			box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.849);
+		}
+	</style>
+
+	<!-- adding favicon -->
+	<link rel="shortcut icon" href="/fan-svg.png" type="image/x-icon">
+
+</head>
+
+<body style="background-color:rgb(0, 0, 0); color:white; ">
+
+	<div class="cooler-container">
+
+		<h1 class="cooler-heading">Cooler Project by DJ</h1>
+
+		<div class="cooler">
+			<!-- on and off buttons -->
+			<button class="cooler-switch on" onclick="coolerOn()">
+				ON
+			</button>
+			<button class="cooler-switch off" onclick="coolerOff()">
+				OFF
+			</button>
+
+			<!-- cooler blade -->
+			<div class="wings-container">
+				<img src="/fan-svg.png" alt="wing" class="wing">
+			</div>
+		</div>
+
+		<!-- cooler foot -->
+		<div class="cooler-foot"></div>
+	</div>
+
+	<script type="text/javascript">
+
+		// accesing elements
+		let onBtn = document.querySelector(".on");
+		let offBtn = document.querySelector(".off");
+		let wing = document.querySelector(".wing");
+
+
+		// function for cooler on
+		function coolerOn() {
+			soundOn();
+			onBtn.style.backgroundColor = "green";
+			offBtn.style.backgroundColor = "red";
+			console.log(wing);
+			wing.classList.add("rotate")
+		}
+
+		// function for cooler off
+		function coolerOff() {
+			soundOff();
+			onBtn.style.backgroundColor = "red";
+			wing.classList.remove("rotate")
+		}
+		let switchSound = document.createElement("audio");
+		switchSound.setAttribute("src", "/switch-sound.mp3");
+		switchSound.setAttribute("preload", "auto");
+		switchSound.setAttribute("controls", "none");
+		switchSound.style.display = "none";
+
+		// creating audio element for cooler sound
+		let coolerSound = document.createElement("audio");
+		coolerSound.setAttribute("src", "/cooler-sound.mp3");
+		coolerSound.setAttribute("preload", "auto");
+		coolerSound.setAttribute("controls", "none");
+		coolerSound.style.display = "none";
+		coolerSound.loop = true;
+
+		// function for play sound when cooler turned on
+		function soundOn() {
+
+			document.body.appendChild(switchSound);
+			switchSound.play();
+			document.body.appendChild(coolerSound);
+			coolerSound.play();
+		}
+
+		// function for pause sound when cooler turned off
+		function soundOff() {
+			document.body.appendChild(switchSound);
+			switchSound.play();
+			document.body.appendChild(coolerSound);
+			coolerSound.pause();
+		}
+	</script>
+
+</body>
+
+</html>
